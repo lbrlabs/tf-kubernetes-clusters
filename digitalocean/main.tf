@@ -5,4 +5,5 @@ module "kubernetes_cluster" {
   cluster_name               = "${var.name}"
   cluster_default_node_size  = "${var.node_size}"
   cluster_default_node_count = "${var.node_count}"
+  kubeconfig_path            = "${var.kubeconfig_path}"
 }
