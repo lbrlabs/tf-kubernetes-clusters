@@ -7,3 +7,11 @@ module "kubernetes_cluster" {
   cluster_default_node_count = "${var.node_count}"
   kubeconfig_path            = "${var.kubeconfig_path}"
 }
+
+resource "null_resource" "kubeconfig" {
+  provisioner "local-exec" {
+    command = "kubectl config rename-context do-${var.region}-${var.name} lbrlabs@do"
+  }
+
+  depends_on = ["module.kubernetes_cluster"]
+}
