@@ -65,6 +65,22 @@ resource "null_resource" "kubeconfig" {
   depends_on = ["google_container_node_pool.default"]
 }
 
+resource "null_resource" "kubeconfig_rename" {
+  provisioner "local-exec" {
+    command = "kubectl config rename-context gke_${var.project_id}_${var.region}-a_${var.name} lbrlabs@gcloud"
+  }
+
+  depends_on = ["null_resource.kubeconfig"]
+}
+
+resource "null_resource" "cluster-admin" {
+  provisioner "local-exec" {
+    command = "kubectx lbrlabs@gcloud && kubectl create clusterrolebinding lee@cluster-admin --clusterrole=cluster-admin --user=gke@briggs.io"
+  }
+
+  depends_on = ["null_resource.kubeconfig"]
+}
+
 output "master_version" {
   value = "${google_container_cluster.primary.master_version}"
 }
