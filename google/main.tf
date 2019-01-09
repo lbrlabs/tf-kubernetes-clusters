@@ -26,11 +26,10 @@ resource "google_container_cluster" "primary" {
 }
 
 resource "google_container_node_pool" "default" {
-  name               = "default"
-  project            = "${var.project_id}"
-  zone               = "${var.region}-a"
-  cluster            = "${google_container_cluster.primary.name}"
-  initial_node_count = "${var.node_count}"
+  name    = "default"
+  project = "${var.project_id}"
+  zone    = "${var.region}-a"
+  cluster = "${google_container_cluster.primary.name}"
 
   autoscaling {
     min_node_count = "${var.node_pool_min_size}"

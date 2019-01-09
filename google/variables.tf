@@ -11,7 +11,7 @@ variable "node_count" {
 }
 
 variable "node_pool_min_size" {
-  default = 0
+  default = 1
 }
 
 variable "node_pool_max_size" {
