@@ -1,4 +1,8 @@
-variable "hosts" {
+variable "master_hosts" {
+  type = "list"
+}
+
+variable "worker_hosts" {
   type = "list"
 }
 
@@ -16,4 +20,8 @@ variable "additional_urls" {
 
 variable "kube_config_path" {
   default = "/tmp/baremetal.yml"
+}
+
+variable "kubernetes_version" {
+  default = "v1.12.4-rancher1-1"
 }
